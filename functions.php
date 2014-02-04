@@ -216,4 +216,11 @@ function cpt_product() {
 }
 
 add_action( 'init', array( 'cpt_web_application', 'cpt_webapp_review', 'cpt_service', 'cpt_product' ) );
+
+// Flush rewrite on activateion
+function cpt_rewrite_flush() {
+    flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'cpt_rewrite_flush' );
+
 ?>
