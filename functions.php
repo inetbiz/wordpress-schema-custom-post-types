@@ -58,7 +58,7 @@ function cpt_software() {
     register_post_type( 'cpt_software', $args );
 }
 
-function cpt_webapp_review() {
+function cpt_review() {
 
     $labels = array( 
         'name' => _x( 'Reviews', 'review' ),
@@ -242,5 +242,95 @@ function cpt_rewrite_flush() {
     flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'cpt_rewrite_flush' );
+
+// template redirects
+
+add_action("template_redirect", 'my_template_redirect');
+
+// Template selection
+function my_template_redirect()
+{
+	global $wp;
+	global $wp_query;
+	if ($wp->query_vars["post_type"] == "software_application")
+	{
+		// Let's look for the property.php template file in the current theme
+		if (have_posts())
+		{
+			include(TEMPLATEPATH . '/software-application.php');
+			die();
+		}
+		else
+		{
+			$wp_query->is_404 = true;
+		}
+	}
+}
+
+add_action("template_redirect", 'my_template_redirect');
+
+// Template selection
+function my_template_redirect()
+{
+	global $wp;
+	global $wp_query;
+	if ($wp->query_vars["post_type"] == "review")
+	{
+		// Let's look for the property.php template file in the current theme
+		if (have_posts())
+		{
+			include(TEMPLATEPATH . '/review.php');
+			die();
+		}
+		else
+		{
+			$wp_query->is_404 = true;
+		}
+	}
+}
+
+add_action("template_redirect", 'my_template_redirect');
+
+// Template selection
+function my_template_redirect()
+{
+	global $wp;
+	global $wp_query;
+	if ($wp->query_vars["post_type"] == "service")
+	{
+		// Let's look for the property.php template file in the current theme
+		if (have_posts())
+		{
+			include(TEMPLATEPATH . '/service.php');
+			die();
+		}
+		else
+		{
+			$wp_query->is_404 = true;
+		}
+	}
+}
+
+add_action("template_redirect", 'my_template_redirect');
+
+// Template selection
+function my_template_redirect()
+{
+	global $wp;
+	global $wp_query;
+	if ($wp->query_vars["post_type"] == "product")
+	{
+		// Let's look for the property.php template file in the current theme
+		if (have_posts())
+		{
+			include(TEMPLATEPATH . '/product.php');
+			die();
+		}
+		else
+		{
+			$wp_query->is_404 = true;
+		}
+	}
+}
 
 ?>
